@@ -1,0 +1,41 @@
+.pagina {
+    background-color: var(--bg-card);
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-top: 25px;
+    box-shadow: var(--shadow);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.pagina-title h2 {
+    font-size: 2.2rem;
+    color: var(--dark);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+    transition: color 0.5s ease;
+}
+
+.pagina-image img {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+}
+
+.pagina-content p {
+    font-size: 1.25rem;
+}
+
+.pagina-content ul {
+    list-style: disc;
+    padding: 0;
+    margin: 15px 0 25px;
+}
+.pagina-content ul li {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+    margin-left: 20px;
+}

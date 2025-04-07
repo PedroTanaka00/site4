@@ -1,0 +1,16 @@
+RewriteEngine On
+Options All -Indexes
+
+# Forçar WWW
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirecionamento HTTPS
+# RewriteCond %{HTTP:X-Forwarded-Proto} !https
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Reescrita de URL do WC
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]

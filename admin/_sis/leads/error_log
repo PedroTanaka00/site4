@@ -1,0 +1,4 @@
+[15-May-2024 18:49:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getLimit() on null in /home/topvinilpiscinas/public_html/admin/_siswc/leads/rel.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/topvinilpiscinas/public_html/admin/_siswc/leads/rel.php on line 32
