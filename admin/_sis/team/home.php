@@ -7,7 +7,7 @@ endif;
 //AUTO DELETE USER TRASH
 if (DB_AUTO_TRASH):
     $Delete = new Delete;
-    $Delete->ExeDelete(DB_USERS, "WHERE user_name IS NULL AND user_email IS NULL and user_password IS NULL AND user_type = 'U' and user_level = :st", "st=1");
+    $Delete->ExeDelete(DB_USERS, "WHERE user_name IS NULL AND user_email IS NULL and user_password IS NULL AND user_type = 'E' and user_level = :st", "st=1");
 endif;
 
 // AUTO INSTANCE OBJECT READ
@@ -25,20 +25,20 @@ $Search = filter_input_array(INPUT_POST);
 if ($Search && $Search['s']):
     $S = urlencode($Search['s']);
     $O = urlencode($Search['opt']);
-    header("Location: dashboard.php?wc=users/home&opt={$O}&s={$S}");
+    header("Location: dashboard.php?wc=team/home&opt={$O}&s={$S}");
     exit;
 endif;
 ?>
 
 <header class="dashboard_header">
     <div class="dashboard_header_title">
-        <h1 class="icon-users">Usuários</h1>
+        <h1 class="icon-user-minus">Equipe</h1>
         <p class="dashboard_header_breadcrumbs">
             &raquo; <?= ADMIN_NAME; ?>
             <span class="crumb">/</span>
             <a title="<?= ADMIN_NAME; ?>" href="dashboard.php?wc=home">Dashboard</a>
             <span class="crumb">/</span>
-            Usuários
+            Equipe
         </p>
     </div>
 
@@ -62,33 +62,33 @@ endif;
     <?php
     $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
     $Page = ($getPage ? $getPage : 1);
-    $Pager = new Pager("dashboard.php?wc=users/home&page=", "<<", ">>", 5);
+    $Pager = new Pager("dashboard.php?wc=team/home&page=", "<<", ">>", 5);
     $Pager->ExePager($Page, 12);
-    $Read->ExeRead(DB_USERS, "WHERE 1 = 1 $WhereString $WhereOpt AND user_type = 'U' ORDER BY user_name ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
+    $Read->ExeRead(DB_USERS, "WHERE 1 = 1 $WhereString $WhereOpt AND user_type = 'E' ORDER BY user_name ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
     if (!$Read->getResult()):
         $Pager->ReturnPage();
-        echo Erro("<span class='al_center icon-notification'>Ainda não existem usuários cadastrados {$Admin['user_name']}. Comece agora mesmo cadastrando um novo usuário. Ou aguarde novos clientes!</span>", E_USER_NOTICE);
+        echo Erro("<span class='al_center icon-notification'>Ainda não existem Equipe cadastrados {$Admin['user_name']}. Comece agora mesmo cadastrando um novo profissional!</span>", E_USER_NOTICE);
     else:
         foreach ($Read->getResult() as $Users):
             extract($Users);
             $user_name = ($user_name ? $user_name : 'Novo');
-            $user_lastname = ($user_lastname ? $user_lastname : 'Usuário');
+            $user_lastname = ($user_lastname ? $user_lastname : 'Profissional');
             $UserThumb = "./uploads/{$user_thumb}";
             $user_thumb = (file_exists($UserThumb) && !is_dir($UserThumb) ? "{$user_thumb}" : 'admin/_img/no_avatar.jpg');
             echo "<article class='single_user box box25 al_center'>
                     <div class='box_content wc_normalize_height'>
                         <img alt='Este é {$user_name}' title='Este é {$user_name}' src='./tim.php?src={$user_thumb}&w=400&h=400'/>
                         <h1>{$user_name} {$user_lastname}</h1>
-                        <p class='nivel icon-equalizer'>" . getWcLevel($user_level) . "</p>
-                        <p class='info icon-envelop'>{$user_email}</p>
+                        <p><strong>{$user_work}</strong></p>
+                        <br>
                         <p class='info icon-calendar'>Desde " . date('d/m/Y \a\s H\h\si', strtotime($user_registration)) . "</p>
                     </div>
                     <div class='single_user_actions'>
-                        <a class='btn btn_green icon-user' href='dashboard.php?wc=users/create&id={$user_id}' title='Gerenciar Usuário!'>Gerenciar Usuário!</a>
+                        <a class='btn btn_green icon-user-minus' href='dashboard.php?wc=team/create&id={$user_id}' title='Gerenciar Profissional!'>Gerenciar Profissional!</a>
                     </div>
                 </article>";
         endforeach;
-        $Pager->ExePaginator(DB_USERS, "WHERE user_type = 'U'");
+        $Pager->ExePaginator(DB_USERS, "WHERE user_type = 'E'");
         echo $Pager->getPaginator();
     endif;
     ?>

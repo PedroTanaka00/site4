@@ -5704,7 +5704,7 @@ CREATE TABLE IF NOT EXISTS `ws_banners` (
   PRIMARY KEY (`banner_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
--- Copiando dados para a tabela weprime_painel.ws_banners: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela weprime_painel.ws_banners: ~1 rows (aproximadamente)
 
 -- Copiando estrutura para tabela weprime_painel.ws_categories
 CREATE TABLE IF NOT EXISTS `ws_categories` (
@@ -5798,7 +5798,7 @@ CREATE TABLE IF NOT EXISTS `ws_gallery_category` (
   PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
--- Copiando dados para a tabela weprime_painel.ws_gallery_category: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela weprime_painel.ws_gallery_category: ~1 rows (aproximadamente)
 
 -- Copiando estrutura para tabela weprime_painel.ws_gallery_images
 CREATE TABLE IF NOT EXISTS `ws_gallery_images` (
@@ -5949,7 +5949,7 @@ CREATE TABLE IF NOT EXISTS `ws_siteviews_online` (
   `online_url` varchar(255) DEFAULT NULL,
   `online_agent` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`online_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23937 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24015 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- Copiando dados para a tabela weprime_painel.ws_siteviews_online: ~0 rows (aproximadamente)
 
@@ -5962,11 +5962,13 @@ CREATE TABLE IF NOT EXISTS `ws_siteviews_views` (
   `views_pages` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`views_id`),
   KEY `idx_1` (`views_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
--- Copiando dados para a tabela weprime_painel.ws_siteviews_views: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela weprime_painel.ws_siteviews_views: ~1 rows (aproximadamente)
 INSERT INTO `ws_siteviews_views` (`views_id`, `views_date`, `views_users`, `views_views`, `views_pages`) VALUES
-	(1, '2025-04-07', 1, 1, 584);
+	(1, '2025-04-07', 1, 1, 586),
+	(2, '2025-04-08', 9, 9, 21),
+	(3, '2025-04-10', 3, 1, 49);
 
 -- Copiando estrutura para tabela weprime_painel.ws_slides
 CREATE TABLE IF NOT EXISTS `ws_slides` (
@@ -6043,6 +6045,7 @@ CREATE TABLE IF NOT EXISTS `ws_users` (
   `user_telephone` varchar(255) DEFAULT NULL,
   `user_cell` varchar(255) DEFAULT NULL,
   `user_work` varchar(255) DEFAULT NULL,
+  `user_description` varchar(255) DEFAULT NULL,
   `user_email` varchar(255) NOT NULL DEFAULT '',
   `user_password` varchar(255) NOT NULL DEFAULT '',
   `user_channel` varchar(255) DEFAULT NULL,
@@ -6052,18 +6055,24 @@ CREATE TABLE IF NOT EXISTS `ws_users` (
   `user_login` varchar(255) DEFAULT NULL,
   `user_login_cookie` varchar(255) DEFAULT NULL,
   `user_level` int(11) NOT NULL DEFAULT 1,
+  `user_type` char(2) DEFAULT 'U' COMMENT 'U = Usuário | E = Equipe',
   `user_facebook` varchar(255) DEFAULT NULL,
   `user_twitter` varchar(255) DEFAULT NULL,
   `user_youtube` varchar(255) DEFAULT NULL,
   `user_google` varchar(255) DEFAULT NULL,
+  `user_instagram` varchar(255) DEFAULT NULL,
+  `user_linkedin` varchar(255) DEFAULT NULL,
   `user_pagarme` varchar(255) DEFAULT NULL,
   `user_blocking_reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
--- Copiando dados para a tabela weprime_painel.ws_users: ~1 rows (aproximadamente)
-INSERT INTO `ws_users` (`user_id`, `user_thumb`, `user_name`, `user_lastname`, `user_document`, `user_genre`, `user_datebirth`, `user_telephone`, `user_cell`, `user_work`, `user_email`, `user_password`, `user_channel`, `user_registration`, `user_lastupdate`, `user_lastaccess`, `user_login`, `user_login_cookie`, `user_level`, `user_facebook`, `user_twitter`, `user_youtube`, `user_google`, `user_pagarme`, `user_blocking_reason`) VALUES
-	(1, 'images/2025/04/1-administradorstartyweb-1744063662.jpg', 'Administrador', 'We Prime', '810.771.650-72', 1, NULL, '(27) 3067-2937', '(27) 99838-5205', NULL, 'admin@weprimeweb.com', '40107666ed36cce1edbb5750adecdf4355d8b9c4fde3964df91e8bea79ce753038c8ca1ab4004232c715ce6cbe347de78b5839b96b0100f379fc15e807da1e8b', NULL, '2018-12-07 21:39:13', '2022-06-21 21:11:25', '2022-10-03 17:56:04', '1664808964', NULL, 10, NULL, NULL, NULL, NULL, NULL, NULL);
+-- Copiando dados para a tabela weprime_painel.ws_users: ~3 rows (aproximadamente)
+INSERT INTO `ws_users` (`user_id`, `user_thumb`, `user_name`, `user_lastname`, `user_document`, `user_genre`, `user_datebirth`, `user_telephone`, `user_cell`, `user_work`, `user_description`, `user_email`, `user_password`, `user_channel`, `user_registration`, `user_lastupdate`, `user_lastaccess`, `user_login`, `user_login_cookie`, `user_level`, `user_type`, `user_facebook`, `user_twitter`, `user_youtube`, `user_google`, `user_instagram`, `user_linkedin`, `user_pagarme`, `user_blocking_reason`) VALUES
+	(1, 'images/2025/04/1-administradorstartyweb-1744063662.jpg', 'Administrador', 'We Prime', '810.771.650-72', 1, NULL, '(27) 3067-2937', '(27) 99838-5205', NULL, NULL, 'admin@weprimeweb.com', '40107666ed36cce1edbb5750adecdf4355d8b9c4fde3964df91e8bea79ce753038c8ca1ab4004232c715ce6cbe347de78b5839b96b0100f379fc15e807da1e8b', NULL, '2018-12-07 21:39:13', '2022-06-21 21:11:25', '2022-10-03 17:56:04', '1664808964', NULL, 10, 'U', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(12, 'images/2025/04/12-dra-mariana-silva-1744294420.jpg', 'Dra. Mariana Silva', NULL, NULL, NULL, NULL, NULL, NULL, 'Diretora Clínica', 'Especialista em Dermatologia Estética com mais de 15 anos de experiência. Formada pela USP com especializações internacionais.', '', '', NULL, '2025-04-10 10:50:24', NULL, NULL, NULL, NULL, 1, 'E', 'https://www.facebook.com/dra.marianasilva/?locale=pt_BR', NULL, NULL, NULL, 'https://www.instagram.com/dra.marianasilva/', 'https://www.linkedin.com/in/mariana-silva-56037a19b?trk=people-guest_people_search-card&originalSubdomain=br', NULL, NULL),
+	(13, 'images/2025/04/13-dr-rafael-mendes-1744294451.jpg', 'Dr. Rafael Mendes', NULL, NULL, NULL, NULL, NULL, NULL, 'Cirurgião Plástico', 'Especialista em procedimentos minimamente invasivos. Membro da Sociedade Brasileira de Cirurgia Plástica.', '', '', NULL, '2025-04-10 11:13:49', NULL, NULL, NULL, NULL, 1, 'E', NULL, NULL, NULL, NULL, 'https://www.instagram.com/dr.rafael/', 'https://www.linkedin.com/in/rafael-mendes', NULL, NULL),
+	(15, 'images/2025/04/15-dra-camila-rocha-1744294588.jpg', 'Dra. Camila Rocha', NULL, NULL, NULL, NULL, NULL, NULL, 'Dermatologista', 'Especialista em tratamentos faciais e corporais. Pós-graduada em Dermatologia Avançada.', '', '', NULL, '2025-04-10 11:16:09', NULL, NULL, NULL, NULL, 1, 'E', 'https://www.facebook.com/camilamdarochadermato/', NULL, NULL, NULL, 'https://www.instagram.com/dracamilarochaderma/', 'https://br.linkedin.com/in/camila-rocha-238177161', NULL, NULL);
 
 -- Copiando estrutura para tabela weprime_painel.ws_users_address
 CREATE TABLE IF NOT EXISTS `ws_users_address` (
@@ -6129,7 +6138,7 @@ CREATE TABLE IF NOT EXISTS `ws_video` (
   PRIMARY KEY (`video_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Copiando dados para a tabela weprime_painel.ws_video: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela weprime_painel.ws_video: ~1 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

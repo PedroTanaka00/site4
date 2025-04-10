@@ -1,0 +1,25 @@
+# Arquivo de credenciais
+acesso painel.txt
+
+
+# Arquivos de cache e temporários
+/temp
+/tmp
+*.log
+*.cache
+
+
+
+# Arquivos gerados pelo sistema
+/dist
+/build
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de editores
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace

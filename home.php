@@ -118,69 +118,51 @@ if($Read->getResult()):
 <?php endif; ?>
 
 
-    <!-- Nossa Equipe -->
-    <section id="nossa-equipe" class="section-padding">
-        <div class="container">
-            <div class="section-title">
-                <h2>Nossa Equipe</h2>
-                <p>Conheça os profissionais dedicados a cuidar da sua beleza e bem-estar</p>
-            </div>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="/placeholder.svg?height=300&width=300" alt="Dra. Mariana Silva">
-                    </div>
-                    <div class="team-info">
-                        <h3>Dra. Mariana Silva</h3>
-                        <p>Diretora Clínica</p>
-                        <div class="team-bio">
-                            Especialista em Dermatologia Estética com mais de 15 anos de experiência. Formada pela USP com especializações internacionais.
-                        </div>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="/placeholder.svg?height=300&width=300" alt="Dr. Rafael Mendes">
-                    </div>
-                    <div class="team-info">
-                        <h3>Dr. Rafael Mendes</h3>
-                        <p>Cirurgião Plástico</p>
-                        <div class="team-bio">
-                            Especialista em procedimentos minimamente invasivos. Membro da Sociedade Brasileira de Cirurgia Plástica.
-                        </div>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="/placeholder.svg?height=300&width=300" alt="Dra. Camila Rocha">
-                    </div>
-                    <div class="team-info">
-                        <h3>Dra. Camila Rocha</h3>
-                        <p>Dermatologista</p>
-                        <div class="team-bio">
-                            Especialista em tratamentos faciais e corporais. Pós-graduada em Dermatologia Avançada.
-                        </div>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+<!-- Nossa Equipe -->
+<?php 
+$Read->FullRead("SELECT user_id, user_thumb, user_name, user_work, user_description, user_facebook, user_instagram, user_linkedin FROM ws_users WHERE user_type = 'E' LIMIT 6");
+if($Read->getResult()):
+?>
+<section id="nossa-equipe" class="section-padding">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nossa Equipe</h2>
+            <p>Conheça os profissionais dedicados a cuidar da sua beleza e bem-estar</p>
         </div>
-    </section>
+        <div class="team-grid">
+            <?php 
+            foreach( $Read->getResult() as $team ):
+            ?>
+            <div class="team-member">
+                <div class="team-image">
+                    <?php 
+                    if ( !empty($team['user_thumb']) && file_exists("admin/uploads/" . $team['user_thumb']) ):
+                        echo '<img src="'.BASE.'/admin/uploads/'.$team["user_thumb"].'" alt="'.$team["user_name"].'">';
+                    else:
+                        echo '<img src="'.BASE.'/admin/_img/no_avatar.jpg" alt="'.$team["user_name"].'">';
+                    endif;
+                    ?>
+                    <img src="/placeholder.svg?height=300&width=300" alt="<?= $team['user_name'] ?>">
+                </div>
+                <div class="team-info">
+                    <h3><?= $team['user_name'] ?></h3>
+                    <p><?= $team['user_work'] ?></p>
+                    <div class="team-bio"><?= $team['user_description'] ?></div>
+                    <div class="team-social">
+                        <?= ($team['user_instagram']) ? '<a href="'.$team['user_instagram'].'" target="_blank"><i class="fab fa-instagram"></i></a>' : ''; ?>
+                        <?= ($team['user_linkedin']) ? '<a href="'.$team['user_linkedin'].'" target="_blank"><i class="fab fa-linkedin-in"></i></a>' : ''; ?>
+                        <?= ($team['user_facebook']) ? '<a href="'.$team['user_facebook'].'" target="_blank"><i class="fab fa-facebook-f"></i></a>' : ''; ?>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+
 
     <!-- Serviços -->
     <section id="servicos" class="section-padding">

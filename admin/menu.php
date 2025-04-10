@@ -103,6 +103,13 @@
 
         if (APP_USERS && $_SESSION['userLogin']['user_level'] >= LEVEL_WC_USERS):
             ?>
+            <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'team/') ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-user-minus" title="Equipe" href="dashboard.php?wc=team/home">Equipe</a>
+                <ul class="dashboard_nav_menu_sub">
+                    <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'team/home' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Ver Profissionais" href="dashboard.php?wc=team/home">&raquo; Ver Profissionais</a></li>
+                    <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'team/create' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Novo Profissional" href="dashboard.php?wc=team/create">&raquo; Novo Profissional</a></li>
+                </ul>
+            </li>
+
             <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'users/') ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-users" title="Usuários" href="dashboard.php?wc=users/home">Usuários</a>
                 <ul class="dashboard_nav_menu_sub">
                     <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'users/home' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Ver Usuários" href="dashboard.php?wc=users/home">&raquo; Ver Usuários</a></li>

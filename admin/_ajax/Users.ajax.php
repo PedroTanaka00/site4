@@ -122,7 +122,41 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
                     endif;
                 endif;
             endif;
-            break;
+        break;
+
+        case 'managerTeam':
+            $UserId = $PostData['user_id'];
+            unset($PostData['user_id'], $PostData['user_thumb']);
+
+           
+            if (!empty($_FILES['user_thumb'])):
+                $UserThumb = $_FILES['user_thumb'];
+                $Read->FullRead("SELECT user_thumb FROM " . DB_USERS . " WHERE user_id = :id", "id={$UserId}");
+                if ($Read->getResult()):
+                    if (file_exists("../uploads/{$Read->getResult()[0]['user_thumb']}") && !is_dir("../uploads/{$Read->getResult()[0]['user_thumb']}")):
+                        unlink("../uploads/{$Read->getResult()[0]['user_thumb']}");
+                    endif;
+                endif;
+
+                $Upload->Image($UserThumb, $UserId . "-" . Check::Name($PostData['user_name']) . '-' . time(), 600);
+                if ($Upload->getResult()):
+                    $PostData['user_thumb'] = $Upload->getResult();
+                else:
+                    $jSON['trigger'] = AjaxErro("<b class='icon-image'>ERRO AO ENVIAR FOTO:</b> Olá {$_SESSION['userLogin']['user_name']}, selecione uma imagem JPG ou PNG para enviar como foto!", E_USER_WARNING);
+                    echo json_encode($jSON);
+                    return;
+                endif;
+            endif;
+
+            
+
+            $jSON['trigger'] = AjaxErro("<b class='icon-checkmark'>TUDO CERTO:</b> Olá {$_SESSION['userLogin']['user_name']}. O profissional {$PostData['user_name']} foi atualizado com sucesso!");
+
+            
+
+            //ATUALIZA USUÁRIO
+            $Update->ExeUpdate(DB_USERS, $PostData, "WHERE user_id = :id", "id={$UserId}");
+        break;
 
         case 'delete':
             $UserId = $PostData['del_id'];
@@ -136,8 +170,6 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
                 elseif ($user_level > $_SESSION['userLogin']['user_level']):
                     $jSON['trigger'] = AjaxErro("<b class='icon-warning'>PERMISSÃO NEGADA:</b> Desculpe {$_SESSION['userLogin']['user_name']}, mas {$user_name} tem acesso superior ao seu. Você não pode remove-lo!", E_USER_WARNING);
                 else:
-                    $Delete->ExeDelete(DB_ORDERS_ITEMS, "WHERE order_id IN(SELECT order_id FROM " . DB_ORDERS . " WHERE user_id = :user)", "user={$user_id}");
-                    $Delete->ExeDelete(DB_ORDERS, "WHERE user_id = :user", "user={$user_id}");
                     $Delete->ExeDelete(DB_USERS_ADDR, "WHERE user_id = :user", "user={$user_id}");
 
                     //COMMENT CONTROL

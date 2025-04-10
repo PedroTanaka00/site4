@@ -33,6 +33,7 @@ if ($UserId):
     endif;
 else:
     $CreateUserDefault = [
+        "user_type" => "U",
         "user_registration" => date('Y-m-d H:i:s'),
         "user_level" => 1
     ];
