@@ -85,6 +85,13 @@ else:
 	</head>
 
 	<body>
+        <!-- Popup que sera renderizado ao enviar o formulario de contato -->
+        <div id="popup" class="popup">
+            <div id="progressBar" class="progress-bar"></div>
+            <p></p>
+        </div>
+        
+
         <?php		
         /**
          * ----------------------------------------------------------------

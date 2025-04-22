@@ -870,19 +870,19 @@ if($Read->getResult()):
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="name" class="form-label">Nome Completo</label>
-                            <input type="text" id="name" class="form-control" placeholder="Seu nome completo" required>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome completo" required>
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">E-mail</label>
-                            <input type="email" id="email" class="form-control" placeholder="Seu melhor e-mail" required>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Seu melhor e-mail" required>
                         </div>
                         <div class="form-group">
                             <label for="phone" class="form-label">Telefone</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="(00) 00000-0000" required>
+                            <input type="tel" id="phone" name="phone" class="form-control"  placeholder="(00) 00000-0000" required>
                         </div>
                         <div class="form-group">
                             <label for="service" class="form-label">Serviço de Interesse</label>
-                            <select id="service" class="form-control" required>
+                            <select id="service" name="service" class="form-control" required>
                                 <option value="">Selecione um serviço</option>
                                 <option value="facial">Tratamentos Faciais</option>
                                 <option value="corporal">Tratamentos Corporais</option>
@@ -894,7 +894,7 @@ if($Read->getResult()):
                         </div>
                         <div class="form-group">
                             <label for="message" class="form-label">Mensagem</label>
-                            <textarea id="message" class="form-control" placeholder="Descreva o que você procura ou suas dúvidas" required></textarea>
+                            <textarea id="message" name="message" class="form-control" placeholder="Descreva o que você procura ou suas dúvidas" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-secondary">Enviar Mensagem</button>
                     </form>

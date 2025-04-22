@@ -166,6 +166,7 @@ if (testimonialTrack && testimonialSlides.length > 0) {
 }
 
 // Form Submission
+/*
 const contactForm = document.getElementById('contact-form');
 
 if (contactForm) {
@@ -187,6 +188,7 @@ if (contactForm) {
         contactForm.reset();
     });
 }
+*/
 
 // Anima elementos ao rolar a página
 function animateOnScroll() {
@@ -277,3 +279,76 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicia o ciclo de digitação/apagamento
     setTimeout(typeAndErase, 1000);
 });
+
+
+
+
+/**
+ *  Função para exibir um popup de notificação
+ */
+let progessInterval;
+
+function exibirPopup(classe, mensagem) {
+    const popup       = document.querySelector("#popup");
+    const progressBar = document.querySelector("#progressBar");
+
+    popup.classList.add(classe);
+    popup.querySelector("p").textContent = mensagem;
+
+    popup.style.display = "block";
+    setTimeout(() => {
+        popup.style.opacity = "1";
+    }, 10);
+
+    let duracao   = 12000;
+    let intervalo = 100;
+    let inc       = (intervalo / duracao) * 100;
+    let progress  = 0;
+
+    progressBar.style.width = "0";
+
+    progessInterval = setInterval(() => {
+        progress += inc;
+        progressBar.style.width = `${progress}%`;
+
+        if(progress >= 100) {
+            fecharPopup();
+        }
+    }, intervalo);
+}
+
+function fecharPopup() {
+    clearInterval(progessInterval);
+
+    const popup = document.querySelector("#popup");
+    popup.style.opacity = "0";
+    setTimeout(() => {
+        popup.style.display = "0";
+    }, 500);
+}
+
+document.getElementById("popup").addEventListener("click", fecharPopup);
+
+
+// Formulário de contato 
+function processaFormulario(e) {
+    e.preventDefault();
+
+    const form = document.querySelector("#contact-form");
+    const formData = new FormData(form);
+
+    fetch(`${baseUrl}/admin/_app/Api/PostContato.php`, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        exibirPopup(data.classe, data.mensagem);
+
+        if(data.classe === "popup-success") 
+            form.reset();
+    })
+    .catch(error => console.error(error));
+}
+
+document.querySelector("#contact-form").addEventListener("submit", (e) => processaFormulario(e));

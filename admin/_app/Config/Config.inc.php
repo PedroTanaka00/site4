@@ -35,11 +35,11 @@ if (!$WorkControlDefineConf):
      * E-MAIL SERVER
      * Consulte estes dados com o serviço de hospedagem
      */
-    define('MAIL_HOST', 'mail.contato@weprimeweb.com'); //Servidor de e-mail
+    define('MAIL_HOST', 'smtp.hostinger.com'); //Servidor de e-mail
     define('MAIL_PORT', '465'); //Porta de envio
     define('MAIL_USER', 'contato@weprimeweb.com'); //E-mail de envio
     define('MAIL_SMTP', 'contato@weprimeweb.com'); //E-mail autenticador do envio (Geralmente igual ao MAIL_USER, exceto em serviços como AmazonSES, sendgrid...)
-    define('MAIL_PASS', 'pP5hESnYWVfn'); //Senha do e-mail de envio
+    define('MAIL_PASS', '4dSsvOZ&pK'); //Senha do e-mail de envio
     define('MAIL_SENDER', 'WePrimeWeb Developers'); //Nome do remetente de e-mail
     define('MAIL_MODE', 'ssl'); //Encriptação para envio de e-mail [0 não parametrizar / tls / ssl] (Padrão = tls)
     define('MAIL_TESTER', ''); //E-mail de testes (DEV)
